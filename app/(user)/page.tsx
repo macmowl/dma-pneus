@@ -2,41 +2,42 @@ import LastArticles from '../../components/homepage/Blog';
 import Contact from '../../components/homepage/Contact';
 import Hero from '../../components/homepage/Hero';
 import Services from '../../components/homepage/Services';
-import { Article } from '../../types/article';
+import { previewData } from 'next/headers';
+import { groq } from 'next-sanity';
+import { client } from '../../lib/sanity.client';
+import PreviewSuspense from '../../components/PreviewSuspense';
+import PreviewLastArticles from '../../components/homepage/PreviewBlog';
 
-const articles: Article[] = [
-  {
-    id: 0,
-    title: "Equipez-vous pour l'hiver",
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    image: '/assets/image1.png',
-    publishedAt: '16 mars 2022',
-  },
-  {
-    id: 1,
-    title: 'Vos vacances à la montagne',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    image: '/assets/image2.png',
-    publishedAt: '16 mars 2022',
-  },
-  {
-    id: 2,
-    title: 'Pourquoi faire son entretien ?',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    image: '/assets/image3.png',
-    publishedAt: '16 mars 2022',
-  },
-];
+const query = groq`
+*[_type=='post'] {
+  ...,
+  author->,
+  categories[]->
+} | order(_createdAt desc)
+`;
 
-const page = () => {
+const page = async () => {
+  if (previewData()) {
+    return (
+      <PreviewSuspense
+        fallback={
+          <div>
+            <p>Loading Preview Data</p>
+          </div>
+        }
+      >
+        <PreviewLastArticles query={query} />
+      </PreviewSuspense>
+    );
+  }
+
+  const posts = await client.fetch(query);
+
   return (
     <div className='flex flex-col items-center'>
       <Hero />
       <Services />
-      <LastArticles articles={articles} />
+      <LastArticles articles={posts} />
       <Contact />
     </div>
   );
