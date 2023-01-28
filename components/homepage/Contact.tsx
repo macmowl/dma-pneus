@@ -4,8 +4,31 @@ import React from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { IContactForm } from '../../types/form';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { sendContactForm } from '../../lib/api';
+import TextField from '@mui/material/TextField';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 
 const Contact = () => {
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<IContactForm>({
+    defaultValues: {
+      name: '',
+      email: '',
+      message: '',
+    },
+  });
+
+  const onSubmit: SubmitHandler<IContactForm> = async (data) => {
+    console.log(data);
+    await sendContactForm(data);
+  };
+
   return (
     <div className='max-w-7xl py-16 px-4 w-full'>
       <div className='flex flex-col sm:flex-row w-full justify-between gap-y-10 sm:gap-y-0 sm:gap-x-6'>
@@ -33,24 +56,57 @@ const Contact = () => {
           </div>
         </div>
         <div className='flex-grow w-full'>
-          <form className='flex flex-col gap-4'>
-            <input
-              type='text'
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='flex flex-col gap-4'
+          >
+            <TextField
               id='name'
-              placeholder='Nom'
-              className='block w-full border rounded py-2 px-3'
+              label='Nom'
+              variant='outlined'
+              size='small'
+              className='bg-white'
+              fullWidth
+              error={Boolean(errors.name)}
+              helperText={errors.name && errors.name.message}
+              {...register('name', {
+                required: 'Votre nom est requis',
+                maxLength: {
+                  value: 80,
+                  message: "C'est un peu long :)",
+                },
+              })}
             />
-            <input
-              type='email'
+            <TextField
               id='email'
-              placeholder='Email'
-              className='block w-full border rounded py-2 px-3'
+              label='Email'
+              variant='outlined'
+              size='small'
+              className='bg-white'
+              fullWidth
+              error={Boolean(errors.email)}
+              helperText={errors.email && errors.email.message}
+              {...register('email', {
+                required: 'Votre email est requis',
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Entrez un email valide',
+                },
+              })}
             />
-            <textarea
+            <TextareaAutosize
+              minRows={4}
               id='message'
               placeholder='Votre message'
               className='block w-full border rounded py-2 px-3 h-44'
-            ></textarea>
+              {...register('message', {
+                required: 'Votre nom est requis',
+                maxLength: {
+                  value: 80,
+                  message: "C'est un peu long :)",
+                },
+              })}
+            />
             <button
               type='submit'
               className='flex-0 bg-[#008EB3] text-white rounded py-2 px-3'

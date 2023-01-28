@@ -8,7 +8,7 @@ const navigation = [
   { name: 'Accueil', href: '/' },
   { name: 'Pneus', href: '/pneus' },
   { name: 'Entretien', href: '/entretien' },
-  { name: 'Blog', href: '/blog' },
+  // { name: 'Blog', href: '/blog' },
 ];
 
 const Header = () => {

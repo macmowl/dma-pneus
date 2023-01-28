@@ -27,6 +27,7 @@ const Hero = () => {
           alt="Vos pneus au prix d'antan"
           width={422}
           height={422}
+          priority={true}
           // blurDataURL="data:..." automatically provided
           // placeholder="blur" // Optional blur-up while loading
         />
