@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -9,12 +9,16 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { sendContactForm } from '../../lib/api';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
+import LoadingButton from '@mui/lab/LoadingButton';
+import SendIcon from '@mui/icons-material/Send';
 
 const Contact = () => {
+  const [loading, setLoading] = useState(false);
   const {
     control,
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm<IContactForm>({
     defaultValues: {
@@ -26,7 +30,17 @@ const Contact = () => {
 
   const onSubmit: SubmitHandler<IContactForm> = async (data) => {
     console.log(data);
-    await sendContactForm(data);
+    setLoading(true);
+    try {
+      reset();
+      const res = await sendContactForm(data);
+      console.log(res);
+      if (res.success) {
+        setLoading(false);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   return (
@@ -107,12 +121,16 @@ const Contact = () => {
                 },
               })}
             />
-            <button
+            <LoadingButton
+              endIcon={<SendIcon />}
               type='submit'
-              className='flex-0 bg-[#008EB3] text-white rounded py-2 px-3'
+              loading={loading}
+              loadingPosition='end'
+              variant='contained'
+              id='SubmitButton'
             >
-              Envoyer
-            </button>
+              <span>Envoyer</span>
+            </LoadingButton>
           </form>
         </div>
       </div>

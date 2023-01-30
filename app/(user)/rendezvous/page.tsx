@@ -2,6 +2,8 @@
 
 import React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import EmailIcon from '@mui/icons-material/Email';
+import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import ContactItem from '../../../components/ContactItem';
 import { Tabs } from '@mantine/core';
 import TyreForm from '../../../components/TyreForm';
@@ -17,13 +19,23 @@ const page = () => {
           <div className='hidden text-white bg-sky-600 sm:flex sm:w-1/3 flex-col p-4 rounded-lg'>
             <h2 className='text-8'>Contact</h2>
             <p>Nous restons à votre disposition pour toute information.</p>
-            <ContactItem icon='LocationOnIcon'>
-              <address>
-                Rue des Hauteurs 28
-                <br />
-                4600 Richelle
-              </address>
-            </ContactItem>
+            <div className='flex flex-col gap-y-8 text-lg'>
+              <div className='flex gap-3'>
+                <LocationOnIcon className='text-white' />
+                <address>
+                  Rue des Hauteurs, 28 <br />
+                  4600 Richelle
+                </address>
+              </div>
+              <div className='flex gap-3'>
+                <LocalPhoneIcon className='text-white' />
+                <a href='tel:+32476399895'>+32 476 39 98 95</a>
+              </div>
+              <div className='flex gap-3'>
+                <EmailIcon className='text-white' />
+                <a href='mailto:hello@dma-services.be'>hello@dma-services.be</a>
+              </div>
+            </div>
           </div>
           <div className='w-full sm:w-2/3'>
             <Tabs defaultValue='pneus'>

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useSelectedLayoutSegment } from 'next/navigation';
+import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
 import React from 'react';
 
 const navigation = [
@@ -12,7 +12,9 @@ const navigation = [
 ];
 
 const Header = () => {
-  const activeSegment = useSelectedLayoutSegment();
+  // const activeSegment = useSelectedLayoutSegments();
+  const path = usePathname();
+  console.log(path);
 
   return (
     <header className='flex items-center justify-between py-4 px-4 max-w-7xl w-full'>
@@ -70,12 +72,8 @@ const Header = () => {
                 <Link
                   key={index}
                   href={item.href}
-                  className={`hover:border-orange-600 hover:border-b-4
-                    ${
-                      activeSegment == item.href
-                        ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-lg'
-                        : 'text-gray-900 text-lg'
-                    }
+                  className={`text-gray-900 text-lg hover:border-orange-600 hover:border-b-2
+                    ${path == item.href ? 'border-orange-600 border-b-2' : ''}
                   `}
                 >
                   {item.name}
@@ -84,8 +82,8 @@ const Header = () => {
               <Link
                 href='rendezvous'
                 className={
-                  activeSegment == '/rendezvous'
-                    ? 'bg-gray-900 text-white px-3 py-2 rounded-md text-lg'
+                  path == '/rendezvous'
+                    ? 'bg-[#007392] text-white px-3 py-2 rounded-md text-lg'
                     : 'bg-[#008EB3] py-2 px-3 rounded-md text-white text-lg hover:bg-[#007392]'
                 }
               >

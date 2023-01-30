@@ -29,11 +29,12 @@ const Services = () => {
         </div>
         <h2 className='text-2xl font-bold md:text-4xl'>A votre service</h2>
         <ul className='mt-8 flex flex-col w-full justify-between sm:flex-row gap-8'>
-          {services.map((service) => (
+          {services.map((service, index) => (
             <ServiceItem
               image={service.image}
               title={service.title}
               desc={service.desc}
+              key={index}
             />
           ))}
         </ul>
