@@ -1,6 +1,6 @@
 import { render } from '@react-email/render';
 import { NextApiRequest, NextApiResponse } from 'next';
-import TyreMail from '../../components/emails/TyreMail';
+import MaintenanceMail from '../../components/emails/MaintenanceMail';
 import { mailOptions, transporter } from '../../config/nodemailer';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -11,7 +11,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-      const emailHTML = render(<TyreMail data={data} />);
+      const emailHTML = render(<MaintenanceMail data={data} />);
       await transporter.sendMail({
         ...mailOptions,
         subject: data.lastName,

@@ -7,13 +7,13 @@ import { Img } from '@react-email/img';
 import { Preview } from '@react-email/preview';
 import { Section } from '@react-email/section';
 import { Text } from '@react-email/text';
-import { IFormTyre } from '../../types/form';
+import { IFormMaintenance } from '../../types/form';
 
 interface Props {
-  data: IFormTyre;
+  data: IFormMaintenance;
 }
 
-const Email: React.FC<Props> = ({ data }) => {
+const MaintenanceMail: React.FC<Props> = ({ data }) => {
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : '';
@@ -39,28 +39,6 @@ const Email: React.FC<Props> = ({ data }) => {
             <Text>{data.carBrand + ' ' + data.carModel}</Text>
           ) : null}
           {data.electric ? <Text>Electrique ou hybride : Oui</Text> : null}
-          {data.tyreWidth ? (
-            <Text style={paragraph}>Largeur : {data.tyreWidth}</Text>
-          ) : null}
-          {data.tyreHeight ? (
-            <Text style={paragraph}>Hauteur : {data.tyreHeight}</Text>
-          ) : null}
-          {data.diameter ? (
-            <Text style={paragraph}>Diamètre : {data.diameter}</Text>
-          ) : null}
-          {data.chargeIndicator ? (
-            <Text style={paragraph}>
-              Indicateur de charge : {data.chargeIndicator}
-            </Text>
-          ) : null}
-          {data.speedIndicator ? (
-            <Text style={paragraph}>
-              Inddicateur de vitesse : {data.speedIndicator}
-            </Text>
-          ) : null}
-          {data.quantity ? (
-            <Text style={paragraph}>Quantité : {data.quantity}</Text>
-          ) : null}
 
           <Hr style={hr} />
           <Text style={footer}>Rue des Hauteurs 28, 4600 Richelle</Text>
@@ -118,4 +96,4 @@ const footer = {
   fontSize: '12px',
 };
 
-export default Email;
+export default MaintenanceMail;

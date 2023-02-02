@@ -7,6 +7,7 @@ import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import ContactItem from '../../../components/ContactItem';
 import { Tabs } from '@mantine/core';
 import TyreForm from '../../../components/TyreForm';
+import MaintenanceForm from '../../../components/MaintenanceForm';
 
 const page = () => {
   return (
@@ -17,9 +18,9 @@ const page = () => {
         </h1>
         <div className='flex w-full rounded-lg drop-shadow-xl p-4 bg-white gap-4'>
           <div className='hidden text-white bg-sky-600 sm:flex sm:w-1/3 flex-col p-4 rounded-lg'>
-            <h2 className='text-8'>Contact</h2>
+            <h2 className='text-3xl font-bold'>Contact</h2>
             <p>Nous restons à votre disposition pour toute information.</p>
-            <div className='flex flex-col gap-y-8 text-lg'>
+            <div className='flex flex-col gap-y-8 text-lg mt-8'>
               <div className='flex gap-3'>
                 <LocationOnIcon className='text-white' />
                 <address>
@@ -47,7 +48,7 @@ const page = () => {
                 <TyreForm />
               </Tabs.Panel>
               <Tabs.Panel value='entretien' pt='xs'>
-                Gallery tab content
+                <MaintenanceForm />
               </Tabs.Panel>
             </Tabs>
           </div>

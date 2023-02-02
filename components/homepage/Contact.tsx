@@ -9,8 +9,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { sendContactForm } from '../../lib/api';
 import TextField from '@mui/material/TextField';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
-import LoadingButton from '@mui/lab/LoadingButton';
-import SendIcon from '@mui/icons-material/Send';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ const Contact = () => {
     handleSubmit,
     register,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IContactForm>({
     defaultValues: {
       name: '',
@@ -32,11 +32,14 @@ const Contact = () => {
     console.log(data);
     setLoading(true);
     try {
-      reset();
       const res = await sendContactForm(data);
       console.log(res);
-      if (res.success) {
+      if (res.message === 'Success') {
+        reset();
         setLoading(false);
+        toast.success('Message envoyé');
+      } else {
+        toast.error("Error lors de l'envoi du message");
       }
     } catch (error) {
       setLoading(false);
@@ -112,25 +115,21 @@ const Contact = () => {
               minRows={4}
               id='message'
               placeholder='Votre message'
-              className='block w-full border rounded py-2 px-3 h-44'
+              className={`block w-full border ${
+                errors.message ? 'border-red-700' : 'border-gray-300'
+              } rounded py-2 px-3 h-44`}
               {...register('message', {
-                required: 'Votre nom est requis',
-                maxLength: {
-                  value: 80,
-                  message: "C'est un peu long :)",
-                },
+                required: 'Votre message est requis',
               })}
             />
-            <LoadingButton
-              endIcon={<SendIcon />}
+            <button
+              disabled={isSubmitting}
               type='submit'
-              loading={loading}
-              loadingPosition='end'
-              variant='contained'
-              id='SubmitButton'
+              className='rounded-md bg-orange-600 hover:bg-orange-700 text-white py-2 px-4'
             >
-              <span>Envoyer</span>
-            </LoadingButton>
+              {isSubmitting ? 'Loading' : 'Envoyer'}
+            </button>
+            <ToastContainer position='bottom-center' />
           </form>
         </div>
       </div>

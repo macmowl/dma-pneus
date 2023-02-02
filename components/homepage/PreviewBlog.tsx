@@ -8,7 +8,6 @@ type Props = {
 
 const PreviewLastArticles: React.FC<Props> = ({ query }) => {
   const posts = usePreview(null, query);
-  console.log('Loading posts...', posts);
   return <LastArticles articles={posts} />;
 };
 

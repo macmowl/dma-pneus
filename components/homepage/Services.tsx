@@ -7,11 +7,13 @@ const services = [
     image: '/assets/servicePneu.png',
     title: 'Tout pour vos pneus',
     desc: 'Besoin de pneus neufs ou vous voulez les permuter pour la saison qui arrive ? DMA est l’expert qu’il vous faut.',
+    link: '/pneus',
   },
   {
     image: '/assets/serviceEntretien.png',
     title: 'Un entretien ?',
     desc: 'Chez DMA, nous faisons également le petit entretien de votre voiture. Nous veillerons à vérifier minutieusement les points clés de votre véhicule.',
+    link: '/entretien',
   },
 ];
 
@@ -34,6 +36,7 @@ const Services = () => {
               image={service.image}
               title={service.title}
               desc={service.desc}
+              link={service.link}
               key={index}
             />
           ))}

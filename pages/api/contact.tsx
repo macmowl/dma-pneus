@@ -18,12 +18,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         text: 'This is a test string',
         html: emailHTML,
       });
+      return res.status(200).json({ message: 'Success' });
     } catch (error: any) {
       console.log(error);
       return res.status(400).json({ message: error.message });
     }
   }
-  console.log(req.body);
   return res.status(404).json({ message: 'Bad request' });
 };
 
