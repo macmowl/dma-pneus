@@ -1,9 +1,58 @@
+'use client';
 import Image from 'next/image';
-// import heroPic from '../public/assets/hero-image.png';
+import { motion, useScroll } from 'framer-motion';
+import { useEffect, useRef } from 'react';
 
 const Hero = () => {
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll();
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     console.log('scroll: ', scrollYProgress);
+  //   }, 1000);
+  //   return () => clearInterval(interval);
+  // }, []);
+
   return (
-    <section className='flex flex-col md:flex-row w-full items-center justify-between px-4 gap-8 py-12 md:py-16 max-w-7xl'>
+    <section
+      ref={containerRef}
+      className='flex flex-col md:flex-row w-full items-center justify-between px-4 gap-8 py-12 md:py-16 max-w-7xl'
+    >
+      <div className='hidden md:block rounded-full bg-white h-6 w-6 absolute left-[35%] top-1/4 shadow-lg'>
+        <Image
+          src='/assets/break-icon.png'
+          width={25}
+          height={25}
+          alt={'Break Icon'}
+        />
+      </div>
+      <div className='hidden rounded-full bg-white h-8 w-8 p-2 absolute left-[49%] top-[430px] shadow-lg sm:flex justify-center items-center'>
+        <Image
+          src='/assets/wheel-icon.png'
+          width={25}
+          height={25}
+          alt={'Break Icon'}
+        />
+      </div>
+      <div className='hidden rounded-full bg-white h-12 w-12 p-2 absolute right-[18%] top-[570px] shadow-lg sm:flex justify-center items-center'>
+        <Image
+          src='/assets/wrench-icon.png'
+          width={25}
+          height={25}
+          alt={'Break Icon'}
+        />
+      </div>
+      <div className='hidden rounded-full bg-white h-8 w-8 absolute right-[30%] top-[180px] shadow-lg sm:flex justify-center items-center'>
+        <Image
+          src='/assets/steering-icon.png'
+          width={28}
+          height={28}
+          alt={'Break Icon'}
+        />
+      </div>
+      <div className='hidden sm:block rounded-full bg-orange-600 h-6 w-6 absolute right-[35%] top-[560px] shadow-md' />
+      <div className='hidden sm:block rounded-full bg-orange-600 h-8 w-8 absolute right-[20%] top-[190px] shadow-md' />
       <div>
         <h1 className='uppercase text-4xl lg:text-6xl leading-10 font-bold'>
           Vos <span className='text-orange-600'>pneus</span> <br />

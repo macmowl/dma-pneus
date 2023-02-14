@@ -21,14 +21,6 @@ const Services = () => {
   return (
     <section className='bg-white w-full py-16 flex justify-center'>
       <div className='max-w-7xl px-4 w-full relative'>
-        <div className='absolute top-0 right-0'>
-          <Image
-            src='/assets/wrench.png'
-            alt='wrench'
-            width='159'
-            height='170'
-          />
-        </div>
         <h2 className='text-2xl font-bold md:text-4xl'>A votre service</h2>
         <ul className='mt-8 flex flex-col w-full justify-between sm:flex-row gap-8'>
           {services.map((service, index) => (
