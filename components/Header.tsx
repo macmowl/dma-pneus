@@ -1,8 +1,9 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useSelectedLayoutSegments } from 'next/navigation';
-import React from 'react';
+import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
+import React, { useState } from 'react';
 
 const navigation = [
   { name: 'Accueil', href: '/' },
@@ -12,9 +13,13 @@ const navigation = [
 ];
 
 const Header = () => {
-  // const activeSegment = useSelectedLayoutSegments();
   const path = usePathname();
-  console.log(path);
+  const [open, setOpen] = useState<boolean>(false);
+
+  const handleClick = () => {
+    console.log('clicked');
+    setOpen(!open);
+  };
 
   return (
     <header className='flex items-center justify-between py-4 px-4 max-w-7xl w-full'>
@@ -27,11 +32,11 @@ const Header = () => {
         <div className='flex items-center sm:hidden'>
           <button
             type='button'
-            className='inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white'
+            className='inline-flex border-orange-500 items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white'
             aria-controls='mobile-menu'
             aria-expanded='false'
+            onClick={handleClick}
           >
-            <span className='sr-only'>Open main menu</span>
             <svg
               className='block h-6 w-6'
               xmlns='http://www.w3.org/2000/svg'
@@ -66,15 +71,20 @@ const Header = () => {
           </button>
         </div>
         <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
-          <div className='hidden sm:ml-6 sm:block'>
-            <div className='flex space-x-4 items-center gap-8'>
+          <div className={`${open ? 'block' : 'hidden'} sm:ml-6 sm:block`}>
+            <div className='flex flex-col pt-24 sm:pt-0 absolute top-0 left-0 right-0 bottom-0 bg-white sm:bg-transparent z-10 sm:relative sm:flex-row items-center gap-8'>
               {navigation.map((item, index) => (
                 <Link
                   key={index}
                   href={item.href}
                   className={`text-gray-900 text-lg hover:border-orange-600 hover:border-b-2
-                    ${path == item.href ? 'border-orange-600 border-b-2' : ''}
+                    ${
+                      path == item.href
+                        ? 'border-orange-600 border-b-2'
+                        : 'border-white border-b-2'
+                    }
                   `}
+                  onClick={() => setOpen(false)}
                 >
                   {item.name}
                 </Link>
@@ -86,6 +96,7 @@ const Header = () => {
                     ? 'bg-[#007392] text-white px-3 py-2 rounded-md text-lg'
                     : 'bg-[#008EB3] py-2 px-3 rounded-md text-white text-lg hover:bg-[#007392]'
                 }
+                onClick={() => setOpen(false)}
               >
                 Rendez-vous
               </Link>

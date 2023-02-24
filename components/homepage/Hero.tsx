@@ -1,25 +1,15 @@
 'use client';
 import Image from 'next/image';
-import { motion, useScroll } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 const Hero = () => {
   const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll();
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.log('scroll: ', scrollYProgress);
-  //   }, 1000);
-  //   return () => clearInterval(interval);
-  // }, []);
-
   return (
     <section
       ref={containerRef}
-      className='flex flex-col md:flex-row w-full items-center justify-between px-4 gap-8 py-12 md:py-16 max-w-7xl'
+      className='flex flex-col relative md:flex-row w-full items-center justify-between px-4 gap-8 py-12 md:py-16 max-w-7xl'
     >
-      <div className='hidden md:block rounded-full bg-white h-6 w-6 absolute left-[35%] top-1/4 shadow-lg'>
+      <div className='hidden md:block rounded-full bg-white h-6 w-6 p-2 absolute left-[35%] shadow-lg'>
         <Image
           src='/assets/break-icon.png'
           width={25}
@@ -27,7 +17,7 @@ const Hero = () => {
           alt={'Break Icon'}
         />
       </div>
-      <div className='hidden rounded-full bg-white h-8 w-8 p-2 absolute left-[49%] top-[430px] shadow-lg sm:flex justify-center items-center'>
+      <div className='hidden rounded-full bg-white h-8 w-8 p-2 absolute left-[49%] shadow-lg sm:flex justify-center items-center'>
         <Image
           src='/assets/wheel-icon.png'
           width={25}
@@ -35,7 +25,7 @@ const Hero = () => {
           alt={'Break Icon'}
         />
       </div>
-      <div className='hidden rounded-full bg-white h-12 w-12 p-2 absolute right-[18%] top-[570px] shadow-lg sm:flex justify-center items-center'>
+      <div className='hidden rounded-full bg-white h-12 w-12 p-2 absolute right-[18%] shadow-lg sm:flex justify-center items-center'>
         <Image
           src='/assets/wrench-icon.png'
           width={25}
