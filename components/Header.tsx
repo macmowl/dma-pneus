@@ -34,6 +34,7 @@ const Header = () => {
             type='button'
             className='inline-flex border-orange-500 items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white'
             aria-controls='mobile-menu'
+            aria-label='mobile-menu'
             aria-expanded='false'
             onClick={handleClick}
           >

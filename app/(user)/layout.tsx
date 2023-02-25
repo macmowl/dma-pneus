@@ -19,7 +19,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html lang='fr'>
       <head />
       <body className='bg-[#FAFAFA] flex flex-col items-center w-full'>
         {/* <ThemeProvider theme={theme}> */}
