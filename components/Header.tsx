@@ -78,11 +78,11 @@ const Header = () => {
                 <Link
                   key={index}
                   href={item.href}
-                  className={`text-gray-900 text-lg hover:border-orange-600 hover:border-b-2
+                  className={`text-gray-900 text-lg hover:transition-all hover:border-orange-600 hover:border-b-2
                     ${
                       path == item.href
                         ? 'border-orange-600 border-b-2'
-                        : 'border-white border-b-2'
+                        : 'border-[#FAFAFA] border-b-2'
                     }
                   `}
                   onClick={() => setOpen(false)}

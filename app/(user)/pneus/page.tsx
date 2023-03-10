@@ -1,6 +1,13 @@
 import React from 'react';
 import Image from 'next/image';
 import CTA from '../../../components/CTA';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Vos pneus avec DMA',
+  description:
+    "Un service de qualité pour le changement de vos pneus ainsi que l'entretien de votre véhicule.",
+};
 
 const page = () => {
   return (

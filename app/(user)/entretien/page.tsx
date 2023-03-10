@@ -2,6 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import TarifEntretien from '../../../components/TarifEntretien';
 import CTA from '../../../components/CTA';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Vos entretiens avec DMA',
+  description:
+    "Nous sommes qualifié pour l'entretien de tout type de véhicule y compris les hybrides et les électriques.",
+};
 
 const page = () => {
   return (

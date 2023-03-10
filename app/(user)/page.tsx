@@ -7,6 +7,13 @@ import { groq } from 'next-sanity';
 import { client } from '../../lib/sanity.client';
 import PreviewSuspense from '../../components/PreviewSuspense';
 import PreviewLastArticles from '../../components/homepage/PreviewBlog';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Garage DMA',
+  description:
+    "Un service de qualité pour le changement de vos pneus ainsi que l'entretien de votre véhicule.",
+};
 
 const query = groq`
 *[_type=='post'] {

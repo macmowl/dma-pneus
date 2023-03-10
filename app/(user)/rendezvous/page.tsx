@@ -4,7 +4,6 @@ import React from 'react';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
-import ContactItem from '../../../components/ContactItem';
 import { Tabs } from '@mantine/core';
 import TyreForm from '../../../components/TyreForm';
 import MaintenanceForm from '../../../components/MaintenanceForm';

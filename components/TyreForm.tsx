@@ -30,12 +30,12 @@ const TyreForm = () => {
       carModel: '',
       electric: false,
       subject: '',
-      tyreWidth: 0,
-      tyreHeight: 0,
-      diameter: 0,
-      chargeIndicator: 0,
+      tyreWidth: undefined,
+      tyreHeight: undefined,
+      diameter: undefined,
+      chargeIndicator: undefined,
       speedIndicator: '',
-      quantity: 0,
+      quantity: 2,
     },
   });
   const [quantity, setQuantity] = React.useState(2);
